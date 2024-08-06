@@ -8,8 +8,10 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - redis
     environment:
       - DATABASE_URL=postgresql://postgres:password@db:5432/password_manager
+      - REDIS_URL=redis://redis:6379/0
     volumes:
       - .:/app
     networks:
@@ -25,6 +27,13 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
     networks:
       - app-network
 
