@@ -34,3 +34,4 @@ jobs:
       - name: Run security analysis
         run: |
           bandit -r src/
+
